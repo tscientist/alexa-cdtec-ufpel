@@ -1,0 +1,13 @@
+{
+    "WELCOME_FLOW_MESSAGE": "Olá! Sou o bot de dúvidas do Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. No que posso te ajudar? Se tiver dúvidas é só falar “ajuda”. ",
+    "HELP_FLOW_MESSAGE": "Meu objetivo é contar sobre informações dos cursos e programas do CDTEC. ",
+    "GRADUATION_FLOW_MESSAGE": "No momento tenho informações sobre os cursos de bacharel em ciência da computação e engenharia de computação. Qual dos dois você gostaria de saber mais?",
+    "OTHERS_FLOW_MESSAGE": "Sua dúvida seria sobre a universidade ou sobre onde localizar o CDTEC ? ",
+    "OTHERS_QUESTION_FLOW_MESSAGE" : "Posso te falar informações sobre o CDTEC ou sobre a universidade federal. Qual você tem interesse em ouvir?",
+    "OTHERS_CDTEC_FLOW_MESSAGE": "O CDTEC está localizado na Sala 312 , Bloco B no Campus Anglo na cidade de Pelotas e você pode entrar em contato pelo telefone: (53) 3284-3890. ",
+    "MORE_QUESTION_MESSAGE": "Posso te ajudar em algo mais? ",
+    "ENDING_FLOW_MESSAGE": "Estou sempre disponível para te ajudar na sua jornada junto com o Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. Até a próxima!",
+    "GRADUATION_COURSE_FLOW_MESSAGE":"O curso de bacharelado em Ciência da Computação foi criado em 1994, na época com o nome de Informática, hoje conta com dois ingresso anuais com 40 vagas cada. A duração mínima é de 4 anos mas a duração comum é de 5 anos. Deseja ouvir sobre as formas de ingresso ou sobre a história do curso",
+    "ADMISSION_FORMS_FLOW_MESSAGE": "Estou sempre disponível para te ajudar na sua jornada junto com o Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. Até a próxima!",
+    "COURSE_HISTORY_FLOW_MESSAGE": "Estou sempre disponível para te ajudar na sua jornada junto com o Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. Até a próxima!"
+}
