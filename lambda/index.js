@@ -103,6 +103,40 @@ const CourseHistoryIntentHandler = {
     }
 };
 
+
+
+const AdmissionFormsIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AdmissionFormsIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['ADMISSION_FORMS_FLOW_MESSAGE'];
+        
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const OthersIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'OthersIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['OTHERS_QUESTION_FLOW_MESSAGE'];
+        
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
