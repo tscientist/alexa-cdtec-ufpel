@@ -36,6 +36,73 @@ const DuvidasIntentHandler = {
     }
 };
 
+
+const HelpIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
+    },
+    handle(handlerInput) {
+        const topics = ['Cursos de graduação', 'Pós graduação', 'Formas de ingresso', 'outros']
+        
+        const speakOutput = `${speakOutputJson['HELP_FLOW_MESSAGE']} Você gostaria de saber sobre: ${util.setList(topics)}`;
+        
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const GraduationIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'GraduationIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['GRADUATION_FLOW_MESSAGE'];
+        
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+
+const GraduationCoursesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'GraduationCoursesIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['GRADUATION_COURSE_FLOW_MESSAGE'];
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const CourseHistoryIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CourseHistoryIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['COURSE_HISTORY_FLOW_MESSAGE'];
+        
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
