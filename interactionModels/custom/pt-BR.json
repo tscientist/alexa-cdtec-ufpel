@@ -1,0 +1,187 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "teste carol",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "tenho dúvidas",
+            "dúvidas",
+            "mais informações ",
+            "Quero saber mais "
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "DuvidasIntent",
+          "slots": [
+            {
+              "name": "UFPel",
+              "type": "ufpelNomes",
+              "samples": [
+                "Em que estado fica a {UFPel}",
+                "Onde fica a {UFPel}"
+              ]
+            }
+          ],
+          "samples": [
+            "Onde fica a {UFPel}"
+          ]
+        },
+        {
+          "name": "GraduationIntent",
+          "slots": [],
+          "samples": [
+            "informações sobre a graduação",
+            "quero saber sobre os cursos de graduação ",
+            "graduação",
+            "Cursos de graduação"
+          ]
+        },
+        {
+          "name": "OthersIntent",
+          "slots": [],
+          "samples": [
+            "quero saber outro assunto",
+            "quero saber sobre outra coisa",
+            "outro assunto",
+            "outras dúvidas",
+            "outros"
+          ]
+        },
+        {
+          "name": "GraduationCoursesIntent",
+          "slots": [
+            {
+              "name": "courses",
+              "type": "coursesNames"
+            }
+          ],
+          "samples": [
+            "curso {courses}",
+            "quero saber sobre o {courses}"
+          ]
+        },
+        {
+          "name": "CourseHistoryIntent",
+          "slots": [],
+          "samples": [
+            "me conta a história do curso",
+            "quero saber sobre a história",
+            "história",
+            "história do curso"
+          ]
+        },
+        {
+          "name": "AdmissionFormsIntent",
+          "slots": [],
+          "samples": [
+            "como posso entrar",
+            "como entrar na faculdade",
+            "ingresso",
+            "formas de ingresso",
+            "formas de admissão "
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "faculdade de pelotas"
+              }
+            },
+            {
+              "name": {
+                "value": "universidade federal de pelotas"
+              }
+            },
+            {
+              "name": {
+                "value": "ufpel"
+              }
+            },
+            {
+              "name": {
+                "value": "ufipéu"
+              }
+            },
+            {
+              "name": {
+                "value": "ufipél"
+              }
+            }
+          ],
+          "name": "ufpelNomes"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "engenharia de computação",
+                "synonyms": [
+                  "engenharia"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "ciência da computação",
+                "synonyms": [
+                  "ciência"
+                ]
+              }
+            }
+          ],
+          "name": "coursesNames"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "DuvidasIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "UFPel",
+              "type": "ufpelNomes",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1353199804824.167831126209"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1353199804824.167831126209",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Não entendi, pode repetir?"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "10"
+}
