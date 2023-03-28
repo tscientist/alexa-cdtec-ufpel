@@ -13,29 +13,15 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         const speakOutput = speakOutputJson['WELCOME_FLOW_MESSAGE'];
-
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.flow = 'session_started';
+        
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
     }
 };
-
-const DuvidasIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'DuvidasIntent';
-    },
-    handle(handlerInput) {
-        const speakOutput = 'A Universidade Federal de Pelotas fica localizada no município de Pelotas, na região sul do estado do Rio Grande do Sul.';
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt('No que mais posso te ajudar?')
-            .getResponse();
-    }
-};
-
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
@@ -44,9 +30,16 @@ const HelpIntentHandler = {
     },
     handle(handlerInput) {
         const topics = ['Cursos de graduação', 'Pós graduação', 'Formas de ingresso', 'outros']
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        let speakOutput;
         
-        const speakOutput = `${speakOutputJson['HELP_FLOW_MESSAGE']} Você gostaria de saber sobre: ${util.setList(topics)}`;
-        
+        if (sessionAttributes.flow == 'session_started') { 
+            sessionAttributes.flow = '';
+            speakOutput = `${speakOutputJson['HELP_FLOW_MESSAGE']} Você gostaria de saber sobre: ${util.setList(topics)}`;
+        } else {
+            speakOutput = `Certo, você gostaria de saber sobre: ${util.setList(topics)}`;
+        }
+
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -62,7 +55,8 @@ const GraduationIntentHandler = {
     },
     handle(handlerInput) {
         const speakOutput = speakOutputJson['GRADUATION_FLOW_MESSAGE'];
-        
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.flow = 'graduation_question';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -78,32 +72,36 @@ const GraduationCoursesIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'GraduationCoursesIntent';
     },
     handle(handlerInput) {
-        const speakOutput = speakOutputJson['GRADUATION_COURSE_FLOW_MESSAGE'];
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-};
-
-const CourseHistoryIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CourseHistoryIntent';
-    },
-    handle(handlerInput) {
-        const speakOutput = speakOutputJson['COURSE_HISTORY_FLOW_MESSAGE'];
+        let speakOutput;
+        let course = Alexa.getSlotValue(handlerInput.requestEnvelope, "courses");
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+         
+        if (sessionAttributes.flow == 'admission_forms_question' || course) {
+            if (course.indexOf("engenharia") != -1) {
+                sessionAttributes.flow = 'engineering_admission_forms';
+            } else {
+                sessionAttributes.flow = 'science_admission_forms';
+            }
+            return AdmissionFormsIntentHandler.handle(handlerInput);
+        } else if (sessionAttributes.flow != 'graduation_question' || !course) {
+            sessionAttributes.flow = '';
+            return GraduationIntentHandler.handle(handlerInput);
+        }
         
-
+        sessionAttributes.flow = 'graduation_course_question';
+        
+        if (course.indexOf("engenharia") != -1) {
+            speakOutput = speakOutputJson['COMPUTER_ENGINEERING_FLOW_MESSAGE'];
+        } else {
+            speakOutput = speakOutputJson['COMPUTER_SCIENCE_FLOW_MESSAGE'];
+        }
+        
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
     }
 };
-
-
 
 const AdmissionFormsIntentHandler = {
     canHandle(handlerInput) {
@@ -111,8 +109,69 @@ const AdmissionFormsIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AdmissionFormsIntent';
     },
     handle(handlerInput) {
-        const speakOutput = speakOutputJson['ADMISSION_FORMS_FLOW_MESSAGE'];
+        let speakOutput = speakOutputJson['ADMISSION_FORMS_FLOW_MESSAGE'];
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
+        if (sessionAttributes.flow == 'science_admission_forms') {
+            speakOutput = speakOutputJson['SCIENCE_ADMISSION_FORMS_FLOW_MESSAGE'] + " Deseja ouvir sobre as atividades complementares?";
+            sessionAttributes.flow = 'admission_forms_second_question';
+        } else if (sessionAttributes.flow == 'engineering_admission_forms') {
+            speakOutput = speakOutputJson['ENGINEERING_ADMISSION_FORMS_FLOW_MESSAGE'] + " Deseja ouvir sobre as atividades complementares?";
+            sessionAttributes.flow = 'admission_forms_second_question';
+        } else {
+            sessionAttributes.flow = 'admission_forms_question';
+        }
+        
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const ResearchLinesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ResearchLinesIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['RESEARCH_LINES_FLOW_MESSAGE'];
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.flow = 'research_lines_question';
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const PostGraduationIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PostGraduationIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['POST_GRADUATION_FLOW_MESSAGE'];
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.flow = 'post_graduation_question';
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const AdditionalActivitiesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AdditionalActivitiesIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = speakOutputJson['ADDITIONAL_ACTIVITIES_FLOW_MESSAGE'];
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.flow = 'additional_activities_question';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -127,9 +186,106 @@ const OthersIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'OthersIntent';
     },
     handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.flow = 'others_first_question';
         const speakOutput = speakOutputJson['OTHERS_QUESTION_FLOW_MESSAGE'];
         
 
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const YesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.YesIntent';
+    },
+    async handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        let speakOutput;
+        
+        switch (sessionAttributes.flow) {
+            case `others_first_question`:
+                sessionAttributes.flow = '';          
+                return AdditionalActivitiesIntentHandler.handle(handlerInput);
+            break;
+            case `others_second_question`:
+                sessionAttributes.flow = '';          
+                return ResearchLinesIntentHandler.handle(handlerInput);
+            break;
+            case 'post_graduation_question':
+                sessionAttributes.flow = '';          
+                return ResearchLinesIntentHandler.handle(handlerInput);
+            break;
+            case 'research_lines_question':
+                sessionAttributes.flow = '';          
+                return GraduationIntentHandler.handle(handlerInput);
+            break;
+            case 'additional_activities_question':
+                sessionAttributes.flow = '';          
+                return PostGraduationIntentHandler.handle(handlerInput);
+            break;
+            case 'graduation_course_question':
+                sessionAttributes.flow = '';          
+                return AdmissionFormsIntentHandler.handle(handlerInput);
+            break;
+            case 'admission_forms_second_question':
+                sessionAttributes.flow = '';          
+                return AdditionalActivitiesIntentHandler.handle(handlerInput);
+            break;
+        }
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const NoIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent';
+    },
+    async handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        let speakOutput;
+        let continuar
+        let mensagem_continuar
+        
+        switch (sessionAttributes.flow) {
+            case `others_first_question`:
+                sessionAttributes.flow = 'others_second_question';       
+                speakOutput = speakOutputJson['OTHERS_SECOND_QUESTION_FLOW_MESSAGE'];
+            break;
+            case `others_second_question`:
+                sessionAttributes.flow = '';       
+                return CancelAndStopIntentHandler.handle(handlerInput);
+            break;
+            case 'post_graduation_question':
+                sessionAttributes.flow = '';          
+                return HelpIntentHandler.handle(handlerInput);
+            break;
+            case 'research_lines_question':
+                sessionAttributes.flow = '';          
+                return HelpIntentHandler.handle(handlerInput);
+            break;
+            case 'additional_activities_question':
+                sessionAttributes.flow = '';          
+                return HelpIntentHandler.handle(handlerInput);
+            break;
+            case 'graduation_course_question':
+                sessionAttributes.flow = '';          
+                return OthersIntentHandler.handle(handlerInput);
+            break;
+            case 'admission_forms_second_question':
+                sessionAttributes.flow = '';          
+                return OthersIntentHandler.handle(handlerInput);
+            break;
+        }
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -162,7 +318,7 @@ const FallbackIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Sorry, I don\'t know about that. Please try again.';
+        const speakOutput = speakOutputJson['OTHERS_QUESTION_FLOW_MESSAGE'];
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -232,13 +388,16 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        DuvidasIntentHandler,
         GraduationIntentHandler,
         OthersIntentHandler,
         AdmissionFormsIntentHandler,
         GraduationCoursesIntentHandler,
-        CourseHistoryIntentHandler,
+        ResearchLinesIntentHandler,
         HelpIntentHandler,
+        PostGraduationIntentHandler,
+        AdditionalActivitiesIntentHandler,
+        YesIntentHandler,
+        NoIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,

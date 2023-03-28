@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "teste carol",
+      "invocationName": "duvidas cdtec",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -23,22 +23,6 @@
         {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
-        },
-        {
-          "name": "DuvidasIntent",
-          "slots": [
-            {
-              "name": "UFPel",
-              "type": "ufpelNomes",
-              "samples": [
-                "Em que estado fica a {UFPel}",
-                "Onde fica a {UFPel}"
-              ]
-            }
-          ],
-          "samples": [
-            "Onde fica a {UFPel}"
-          ]
         },
         {
           "name": "GraduationIntent",
@@ -70,18 +54,10 @@
             }
           ],
           "samples": [
+            "computação",
+            "{courses}",
             "curso {courses}",
             "quero saber sobre o {courses}"
-          ]
-        },
-        {
-          "name": "CourseHistoryIntent",
-          "slots": [],
-          "samples": [
-            "me conta a história do curso",
-            "quero saber sobre a história",
-            "história",
-            "história do curso"
           ]
         },
         {
@@ -94,6 +70,52 @@
             "formas de ingresso",
             "formas de admissão "
           ]
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "PostGraduationIntent",
+          "slots": [],
+          "samples": [
+            "opções de pós graduação",
+            "quero fazer doutorado",
+            "tem mestrado na ufpel",
+            "tenho dúvidas sobre o mestrado",
+            "doutorado",
+            "mestrado",
+            "quero saber sobre a pós",
+            "pós graduação"
+          ]
+        },
+        {
+          "name": "AdditionalActivitiesIntent",
+          "slots": [],
+          "samples": [
+            "informações sobre atividades complementares",
+            "quantas horas complementares preciso",
+            "disciplinas optativas",
+            "horas complementares",
+            "atividades complementares"
+          ]
+        },
+        {
+          "name": "ResearchLinesIntent",
+          "slots": [],
+          "samples": [
+            "linhas de pesquisa da pós graduação",
+            "quais as linhas de pesquisa",
+            "linhas de pesquisa"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
         }
       ],
       "types": [
@@ -133,6 +155,7 @@
               "name": {
                 "value": "engenharia de computação",
                 "synonyms": [
+                  "engenharia da computacao",
                   "engenharia"
                 ]
               }
@@ -141,6 +164,8 @@
               "name": {
                 "value": "ciência da computação",
                 "synonyms": [
+                  "ciencia da computacao",
+                  "ciencia",
                   "ciência"
                 ]
               }
@@ -149,39 +174,7 @@
           "name": "coursesNames"
         }
       ]
-    },
-    "dialog": {
-      "intents": [
-        {
-          "name": "DuvidasIntent",
-          "confirmationRequired": false,
-          "prompts": {},
-          "slots": [
-            {
-              "name": "UFPel",
-              "type": "ufpelNomes",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.1353199804824.167831126209"
-              }
-            }
-          ]
-        }
-      ],
-      "delegationStrategy": "ALWAYS"
-    },
-    "prompts": [
-      {
-        "id": "Elicit.Slot.1353199804824.167831126209",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "Não entendi, pode repetir?"
-          }
-        ]
-      }
-    ]
+    }
   },
-  "version": "10"
+  "version": "20"
 }
