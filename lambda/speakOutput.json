@@ -2,12 +2,17 @@
     "WELCOME_FLOW_MESSAGE": "Olá! Sou o bot de dúvidas do Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. No que posso te ajudar? Se tiver dúvidas é só falar “ajuda”. ",
     "HELP_FLOW_MESSAGE": "Meu objetivo é contar sobre informações dos cursos e programas do CDTEC. ",
     "GRADUATION_FLOW_MESSAGE": "No momento tenho informações sobre os cursos de bacharel em ciência da computação e engenharia de computação. Qual dos dois você gostaria de saber mais?",
-    "OTHERS_FLOW_MESSAGE": "Sua dúvida seria sobre a universidade ou sobre onde localizar o CDTEC ? ",
-    "OTHERS_QUESTION_FLOW_MESSAGE" : "Posso te falar informações sobre o CDTEC ou sobre a universidade federal. Qual você tem interesse em ouvir?",
-    "OTHERS_CDTEC_FLOW_MESSAGE": "O CDTEC está localizado na Sala 312 , Bloco B no Campus Anglo na cidade de Pelotas e você pode entrar em contato pelo telefone: (53) 3284-3890. ",
     "MORE_QUESTION_MESSAGE": "Posso te ajudar em algo mais? ",
     "ENDING_FLOW_MESSAGE": "Estou sempre disponível para te ajudar na sua jornada junto com o Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. Até a próxima!",
-    "GRADUATION_COURSE_FLOW_MESSAGE":"O curso de bacharelado em Ciência da Computação foi criado em 1994, na época com o nome de Informática, hoje conta com dois ingresso anuais com 40 vagas cada. A duração mínima é de 4 anos mas a duração comum é de 5 anos. Deseja ouvir sobre as formas de ingresso ou sobre a história do curso",
-    "ADMISSION_FORMS_FLOW_MESSAGE": "Estou sempre disponível para te ajudar na sua jornada junto com o Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. Até a próxima!",
-    "COURSE_HISTORY_FLOW_MESSAGE": "Estou sempre disponível para te ajudar na sua jornada junto com o Centro de Desenvolvimento Tecnológico da universidade federal de pelotas. Até a próxima!"
+    "COMPUTER_ENGINEERING_FLOW_MESSAGE":"Proposto em 2009, o curso de graduação em Engenharia de Computação da UFPel, vem ao encontro dos anseios da comunidade por cursos ligados as engenharias e tecnologia. O curso oferece 45 vagas anuais, no regime semestral, com duração mínima de dez semestres e o turno é integral. Deseja ouvir sobre as formas de ingresso?",
+    "COMPUTER_SCIENCE_FLOW_MESSAGE":"O curso de bacharelado em Ciência da Computação foi criado em 1994, na época com o nome de Informática, hoje conta com dois ingresso anuais com 50 vagas cada. A duração mínima é de 4 anos mas a duração comum é de 5 anos. Deseja ouvir sobre as formas de ingresso?",
+    "ADMISSION_FORMS_FLOW_MESSAGE": "Você quer saber sobre as formas de ingresso do curso ciência da computação ou engenharia de computação?",
+    "OTHERS_QUESTION_FLOW_MESSAGE" : "Tenho mais diversas funcionalidades. Deseja ouvir informações sobre  as atividades complementares?",
+    "OTHERS_SECOND_QUESTION_FLOW_MESSAGE": "Certo, então você gostaria de ouvir informações sobre  as linhas de pesquisa do Programa de pós graduação?",
+    "POST_GRADUATION_FLOW_MESSAGE": "O Programa de Pós-Graduação em Computação (PPGC) da UFPel, oferece cursos de Mestrado Acadêmico e Doutorado em Ciência da Computação com ingresso anual em cinco linhas de pesquisa. O PPGC recebeu conceito 5 na última avaliação. Quer saber sobre as linhas de pesquisa?",
+    "RESEARCH_LINES_FLOW_MESSAGE": "O Programa de Pós-Graduação em Computação possui cinco linhas de pesquisa. São elas: - Fundamentos da Computação, Multimídia e Processamento Digital de Sinais, Processamento Paralelo e Distribuído, Sistemas Digitais e Embarcados, Sistemas Inteligentes. Quer saber sobre os cursos de graduação?",
+    "ADDITIONAL_ACTIVITIES_FLOW_MESSAGE": "Para adquirir o titulo de cientista da computação ou engenheiro de computação o aluno terá que cumprir um mínimo de 320 horas em atividades complementares em atividades de ensino, pesquisa ou extensão. Cumprindo o mínimo de 120 horas em duas das opções. O aluno também terá que adquirir um mínimo de 217 horas em atividades livres. Quer saber sobre o Programa de Pós-Graduação em Computação?",
+    "SCIENCE_ADMISSION_FORMS_FLOW_MESSAGE": "O curso de bacharelado em Ciência da Computação hoje conta com dois ingresso anuais com 50 vagas cada. São 40 vagas pelo SISU e 10 vagas reservadas para o PAVE.",
+    "ENGINEERING_ADMISSION_FORMS_FLOW_MESSAGE": "O curso de engenharia de Computação oferece 45 vagas anuais. São 35 vagas pelo SISU e 10 vagas reservadas para o PAVE."
+    
 }
